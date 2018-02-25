@@ -59,7 +59,7 @@ cedarChart.series([
 
 ```js
 // execute query and render chart
-chart.show();
+cedarChart.show();
 ```
 
 #### Demo: ES5 Example
