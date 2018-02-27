@@ -98,7 +98,11 @@ Above examples are v1, which is [still in beta](https://github.com/Esri/cedar/mi
 - [ember-cli-cedar] can be used in _any_ Ember application
 
 #### Demo: Cedar in ArcGIS Hub
-- TODO: find/create a good site/page w/ charts
+- sites/pages w/ charts
+ - The one that started it all: http://geohub.lacity.org/
+ - Similar implemented w/ cedar: http://nullvisjonen-vision-zero-1-testkommune.hub.arcgis.com/
+ - Another cedar site: http://nopoverty-sdgs.opendata.arcgis.com/pages/onedottwodottwo
+ - TODO: others? make one?
 - TODO: find a good example dataset to show attribute distributions
 
 ### Cedar's Road Ahead
