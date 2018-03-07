@@ -121,12 +121,10 @@ definition.type = 'bar';
 ### Definition `datasets`
 
 ```js
-definition.datatsets = [
-  {
-    "url": "https://server.arcgisonline.com/arcgis/rest/services/Demographis/USA_Population_Density/MapServer/4",
-    "query": { orderByFields: "TotPop DESC" }
-  }
-]
+definition.datatsets = [{
+  url: "https://server.arcgisonline.com/arcgis/rest/services/Demographis/USA_Population_Density/MapServer/4",
+  query: { orderByFields: "TotPop DESC" }
+}]
 ```
 
 ---
@@ -138,8 +136,8 @@ definition.datatsets = [
 ```js
 definition.series = [
   {
-    "category": {"field":"NAME","label":"US State"},
-    "value": {"field":"TOTPOP_CY","label":"Population"}
+    category: {field:"NAME",label:"US State"},
+    value: {field:"TOTPOP_CY",label:"Population"}
   }
 ]
 ```
@@ -154,7 +152,7 @@ definition.series = [
 import { Chart } from '@esri/cedar';
 
 // create a new cedar chart at a specified element
-const myChart = new Chart('elementId', definition);
+const myChart = new Chart('elementId', definition)
 ```
 
 ---
@@ -165,7 +163,7 @@ const myChart = new Chart('elementId', definition);
 
 ```js
 // create a new cedar chart at a specified element
-var myChart = new cedar.Chart('elementId', definition);
+var myChart = new cedar.Chart('elementId', definition)
 ```
 
 &nbsp;
@@ -178,5 +176,136 @@ var myChart = new cedar.Chart('elementId', definition);
 
 ```js
 // execute query and render chart
-cedarChart.show();
+cedarChart.show()
 ```
+
+---
+
+<h3><img src="img/icons8-usa_map.png" class="transparent inline"> Working with maps</h3>
+
+---
+
+### Dataset `data`
+
+```js
+definition.datatsets = [{
+  data: { features: graphics }
+}]
+```
+
+Expects a [FeatureSet](https://esri.github.io/arcgis-rest-js/api/common-types/IFeatureSet/)
+
+Note:
+- _instead_ of `url` and `query`
+- TODO: demo loading data from map
+
+---
+
+### Aggregating map data
+
+<a href="https://codepen.io/tomwayson/pen/YaKGjZ"><img src="img/map-with-aggregate-chart.png" height="500" class="transparent" /></a>
+
+---
+
+### Dataset `data` with aggregate `query`
+
+```js
+definition.datasets: [{
+  url: "https://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/It's_a_Tornado_Map/FeatureServer/0",
+  query: {
+    groupByFieldsForStatistics: "state",
+    outStatistics: [{
+      statisticType: "sum",
+      onStatisticField: "injuries",
+      outStatisticFieldName: "injuries_SUM"
+    }]
+  }
+}]
+```
+
+Accepts any [valid query parameters](https://esri.github.io/arcgis-rest-js/api/feature-service/IQueryFeaturesParams/)
+
+---
+
+### Chart [types](http://cedar-v1.surge.sh/)
+
+<a href="http://cedar-v1.surge.sh/?type=bar"><img src="img/icons8-bar_chart.png" class="transparent"></a>
+<a href="http://cedar-v1.surge.sh/?type=line"><img src="img/icons8-line_chart.png" class="transparent"></a>
+<a href="http://cedar-v1.surge.sh/?type=area"><img src="img/icons8-area_chart.png" class="transparent"></a>
+<a href="http://cedar-v1.surge.sh/?type=scatter"><img src="img/icons8-scatter_plot.png" class="transparent"></a>
+<a href="http://cedar-v1.surge.sh/?type=pie"><img src="img/icons8-rebalance_portfolio.png" class="transparent"></a>
+<a href="http://cedar-v1.surge.sh/?type=bar-grouped"><img src="img/icons8-futures.png" class="transparent"></a>
+
+---
+
+### Overriding chart defaults
+
+```js
+definition.overrides = {
+  categoryAxis: {
+    labelRotation: -45
+  },
+  legend: {
+    enabled: true
+  }
+}
+```
+
+Accepts any [amCharts config parameters](https://docs.amcharts.com/3/javascriptcharts/AmChart)
+
+---
+
+### Better to use cedar API
+
+```js
+definition.overrides = {
+  categoryAxis: {
+    labelRotation: -45
+  }
+}
+
+definition.legend = {
+  visible: true
+}
+```
+
+Note:
+- we're expanding API
+- aligning w/ shared chart spec
+
+<!--
+---
+
+### Create your own chart specification
+
+```js
+definition.specification = {
+  type: 'serial',
+  categoryField: 'category',
+  categoryAxis: {
+    gridPosition: 'start'
+  },
+  graphs: [
+    {
+      title: 'Graph title',
+      valueField: 'column-1'
+    }
+  ],
+  valueAxes: [
+    {
+      title: 'Axis title'
+    }
+  ],
+  legend: {
+    useGraphSettings: true
+  },
+  titles: [
+    {
+      size: 15,
+      text: 'Chart Title'
+    }
+  ]
+}
+```
+
+Accepts any [amCharts config parameters](https://docs.amcharts.com/3/javascriptcharts/AmChart) -->
