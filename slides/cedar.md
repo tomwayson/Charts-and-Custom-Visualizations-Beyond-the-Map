@@ -309,3 +309,70 @@ definition.specification = {
 ```
 
 Accepts any [amCharts config parameters](https://docs.amcharts.com/3/javascriptcharts/AmChart) -->
+
+---
+
+### v1 compared to [v0](http://esri.github.io/cedar/)
+<ul>
+  <li>brings improved support for multi-series charts
+  <li class="fragment">join data from multiple queries
+  <li class="fragment">better control of data (promises)
+  <li class="fragment">uses [AmCharts](https://www.amcharts.com/javascript-charts/) instead of [vega](https://vega.github.io/vega/) and [d3](https://d3js.org/)
+</ul>
+
+Note:
+promise-based, fluent API
+
+---
+
+### v1 [still in beta](https://github.com/Esri/cedar/milestone/6)
+Gaps:
+- docs (you're looking at it)
+- configuring tooltips
+- chart events (click, mouseover, etc)
+- chart selection
+
+---
+
+<h3><img src="img/ArcGIS-Hub.png" height="100" class="inline transparent"> Cedar in ArcGIS Hub</h3>
+
+Note:
+- we are using cedar in production
+
+---
+
+### ArcGIS Hub users drive cedar requirements
+
+<a href="http://geohub.lacity.org/"><img src="img/la-geohub-vision-zero.png" class="transparent" width="800"></a>
+
+Recent [example built with cedar](http://nullvisjonen-vision-zero-1-testkommune.hub.arcgis.com/)
+
+---
+
+### Simplified chart building experience
+
+<a href="https://esri.invisionapp.com/share/KPEVB3AQU#/screens/268312097">
+<img src="img/chart-builder.png" class="transparent" height="400">
+<img src="img/json-chart-editor.png" class="transparent" height="400">
+</a>
+
+---
+
+### [ember-cli-cedar](https://github.com/Esri/ember-cli-cedar)
+
+<img src="img/tomster-sm.png" class="transparent">
+
+Can be used in _any_ [Ember](https://www.emberjs.com/) application
+
+---
+
+<h3><img src="img/icons8-road_filled.png" height="100" class="inline transparent"> Cedar's road ahead</h3>
+
+---
+
+### <code style="color: gray">// TODO:</code>
+- docs!
+- shared ArcGIS chart spec
+ - expand cedar API
+ - `import()`
+- [finish v1](https://github.com/Esri/cedar/milestone/6)

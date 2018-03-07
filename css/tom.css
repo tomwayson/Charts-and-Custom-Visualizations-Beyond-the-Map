@@ -1,6 +1,9 @@
 .reveal section img {
   border: 0px;
 }
+.reveal ul {
+  list-style-type: none;
+}
 
 .reveal img.transparent {
   background: none;
