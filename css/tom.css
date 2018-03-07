@@ -12,6 +12,8 @@
   vertical-align: middle;
 }
 
-.reveal code {
-  color: #e91e63;
+.center-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
