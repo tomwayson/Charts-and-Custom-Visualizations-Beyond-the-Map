@@ -6,3 +6,12 @@
   background: none;
   box-shadow: none;
 }
+
+.reveal img.inline {
+  margin: 0;
+  vertical-align: middle;
+}
+
+.reveal code {
+  color: #e91e63;
+}
