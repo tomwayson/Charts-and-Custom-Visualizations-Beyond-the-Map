@@ -185,6 +185,12 @@ cedarChart.show()
 
 ---
 
+### Charting features
+
+<a href="https://codepen.io/tomwayson/pen/mxdVqO?editors=0110"><img src="img/map-with-feature-chart.png" height="500" class="transparent" /></a>
+
+---
+
 ### Dataset `data`
 
 ```js
@@ -197,7 +203,16 @@ Expects a [FeatureSet](https://esri.github.io/arcgis-rest-js/api/common-types/IF
 
 Note:
 - _instead_ of `url` and `query`
-- TODO: demo loading data from map
+
+---
+
+### Use JavaScript to filter/sort
+
+```js
+graphics.sort(function(a, b) {
+  return b.attributes.Grand_Tota -a.attributes.Grand_Tota;
+});
+```
 
 ---
 
@@ -376,3 +391,13 @@ Can be used in _any_ [Ember](https://www.emberjs.com/) application
  - expand cedar API
  - `import()`
 - [finish v1](https://github.com/Esri/cedar/milestone/6)
+
+---
+
+### Demo: `import()` ArcGIS Pro chart
+
+---
+
+### The End
+
+[@tomwayson/tomwayson/Charts-and-Custom-Visualizations-Beyond-the-Map](https://github.com/tomwayson/Charts-and-Custom-Visualizations-Beyond-the-Map)
