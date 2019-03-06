@@ -350,8 +350,6 @@ Note:
 
 <a href="http://geohub.lacity.org/"><img src="img/la-geohub-vision-zero.png" class="transparent" width="800"></a>
 
-Recent [example built with cedar](http://nullvisjonen-vision-zero-1-testkommune.hub.arcgis.com/)
-
 ---
 
 ### Simplified chart building experience
@@ -363,11 +361,24 @@ Recent [example built with cedar](http://nullvisjonen-vision-zero-1-testkommune.
 
 ---
 
+### Cedar Charts in Hub Sites
+
+- Chart Builder: [John's Creek - City Finances](http://datahub.johnscreekga.gov/pages/finances)
+- Custom JSON: [City of Brampton - Globally Aware, Locally Active](http://geohub.brampton.ca/pages/globally-aware-locally-active-economy#five)
+
+---
+
+
 ### [ember-cli-cedar](https://github.com/Esri/ember-cli-cedar)
 
 <img src="img/tomster-sm.png" class="transparent">
 
 Can be used in _any_ [Ember](https://www.emberjs.com/) application
+
+Notes:
+- makes it easy to get cedar in Ember
+- helps you lazy-load amcharts
+- not
 
 ---
 
@@ -380,7 +391,8 @@ Can be used in _any_ [Ember](https://www.emberjs.com/) application
 - configuring tooltips
 - chart events (click, mouseover, etc)
 - chart selection
-- [finish v1](https://github.com/Esri/cedar/milestone/6)
+- lazy-load charting library
+- support other charting libraries (engines)
 
 ---
 
