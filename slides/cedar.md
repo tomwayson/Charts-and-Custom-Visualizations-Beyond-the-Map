@@ -178,6 +178,8 @@ var myChart = new cedar.Chart('elementId', definition)
 cedarChart.show()
 ```
 
+See the complete [Chart API](http://esri.github.io/cedar/api/classes/chart.html)
+
 ---
 
 <h3><img src="img/icons8-usa_map.png" class="transparent inline"> Working with maps</h3>
