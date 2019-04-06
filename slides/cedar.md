@@ -117,13 +117,12 @@ definition.type = 'bar';
 ---
 
 <!-- .slide: data-transition="none" -->
-
 ### Definition `datasets`
 
 ```js
 definition.datatsets = [{
-  url: "https://server.arcgisonline.com/arcgis/rest/services/Demographis/USA_Population_Density/MapServer/4",
-  query: { orderByFields: "TotPop DESC" }
+  url: "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_States_Generalized/FeatureServer/0",
+  query: { orderByFields: "POPULATION DESC" }
 }]
 ```
 
@@ -136,8 +135,8 @@ definition.datatsets = [{
 ```js
 definition.series = [
   {
-    category: {field:"NAME",label:"US State"},
-    value: {field:"TOTPOP_CY",label:"Population"}
+    category: {field:"STATE_NAME",label:"US State"},
+    value: {field:"POPULATION",label:"Population"}
   }
 ]
 ```
@@ -157,7 +156,7 @@ const myChart = new Chart('elementId', definition)
 
 ---
 
-### Create chart instance (UMD)
+### Create chart instance (global)
 
 <!-- .slide: data-transition="none" -->
 
@@ -178,6 +177,8 @@ var myChart = new cedar.Chart('elementId', definition)
 // execute query and render chart
 cedarChart.show()
 ```
+
+See the complete [Chart API](http://esri.github.io/cedar/api/classes/chart.html)
 
 ---
 
@@ -210,7 +211,7 @@ Note:
 
 ```js
 graphics.sort(function(a, b) {
-  return b.attributes.Grand_Tota -a.attributes.Grand_Tota;
+  return b.attributes.POPULATION - a.attributes.POPULATION;
 });
 ```
 
@@ -222,7 +223,7 @@ graphics.sort(function(a, b) {
 
 ---
 
-### Dataset `data` with aggregate `query`
+### Dataset `url` with aggregate `query`
 
 ```js
 definition.datasets: [{
@@ -240,16 +241,36 @@ definition.datasets: [{
 
 Accepts any [valid query parameters](https://esri.github.io/arcgis-rest-js/api/feature-service/IQueryFeaturesParams/)
 
+
 ---
 
-### Chart [types](http://cedar-v1.surge.sh/)
+<a href="https://jsbin.com/juqafec/edit?html,output"><img src="img/client-side-query.gif" height="500" class="transparent" /></a>
 
-<a href="http://cedar-v1.surge.sh/?type=bar"><img src="img/icons8-bar_chart.png" class="transparent"></a>
-<a href="http://cedar-v1.surge.sh/?type=line"><img src="img/icons8-line_chart.png" class="transparent"></a>
-<a href="http://cedar-v1.surge.sh/?type=area"><img src="img/icons8-area_chart.png" class="transparent"></a>
-<a href="http://cedar-v1.surge.sh/?type=scatter"><img src="img/icons8-scatter_plot.png" class="transparent"></a>
-<a href="http://cedar-v1.surge.sh/?type=pie"><img src="img/icons8-rebalance_portfolio.png" class="transparent"></a>
-<a href="http://cedar-v1.surge.sh/?type=bar-grouped"><img src="img/icons8-futures.png" class="transparent"></a>
+[Client-side queries](https://jsbin.com/juqafec/edit?html,output)
+
+
+---
+
+### Update the chart `data` and re-`render()`
+
+```js
+// Query the features on the client using FeatureLayerView.queryFeatures
+return featureLayerView.queryFeatures(query).then(function(results) {
+  chart.datasets('tracts').data = results;
+  chart.render();
+}
+```
+
+---
+
+### Chart [types](https://esri.github.io/cedar/)
+
+<a href="https://esri.github.io/cedar/?type=bar"><img src="img/icons8-bar_chart.png" class="transparent"></a>
+<a href="https://esri.github.io/cedar/?type=line"><img src="img/icons8-line_chart.png" class="transparent"></a>
+<a href="https://esri.github.io/cedar/?type=area"><img src="img/icons8-area_chart.png" class="transparent"></a>
+<a href="https://esri.github.io/cedar/?type=scatter"><img src="img/icons8-scatter_plot.png" class="transparent"></a>
+<a href="https://esri.github.io/cedar/?type=pie"><img src="img/icons8-rebalance_portfolio.png" class="transparent"></a>
+<a href="https://esri.github.io/cedar/?type=bar-grouped"><img src="img/icons8-futures.png" class="transparent"></a>
 
 ---
 
@@ -288,64 +309,35 @@ Note:
 - we're expanding API
 - aligning w/ shared chart spec
 
-<!--
 ---
 
-### Create your own chart specification
+### Decoding [domain values](https://esri.github.io/cedar/?type=bar-domain)
 
-```js
-definition.specification = {
-  type: 'serial',
-  categoryField: 'category',
-  categoryAxis: {
-    gridPosition: 'start'
-  },
-  graphs: [
-    {
-      title: 'Graph title',
-      valueField: 'column-1'
-    }
-  ],
-  valueAxes: [
-    {
-      title: 'Axis title'
-    }
-  ],
-  legend: {
-    useGraphSettings: true
-  },
-  titles: [
-    {
-      size: 15,
-      text: 'Chart Title'
-    }
-  ]
+```json
+"domains": {
+  "sheltstat": {
+    "type": "codedValue",
+    "name": "ShelterCode",
+    "description": "Shelter Codes",
+    "codedValues": [
+      {
+        "name": "Open",
+        "code": 1
+      },
+      {
+        "name": "Closed",
+        "code": 2
+      },
+      {
+        "name": "Full",
+        "code": 3
+      }
+    ]
+  }
 }
 ```
 
-Accepts any [amCharts config parameters](https://docs.amcharts.com/3/javascriptcharts/AmChart) -->
-
----
-
-### v1 compared to [v0](http://esri.github.io/cedar/)
-<ul>
-  <li>brings improved support for multi-series charts
-  <li class="fragment">join data from multiple queries
-  <li class="fragment">better control of data (promises)
-  <li class="fragment">uses [AmCharts](https://www.amcharts.com/javascript-charts/) instead of [vega](https://vega.github.io/vega/) and [d3](https://d3js.org/)
-</ul>
-
-Note:
-promise-based, fluent API
-
----
-
-### v1 [still in beta](https://github.com/Esri/cedar/milestone/6)
-Gaps:
-- docs (you're looking at it)
-- configuring tooltips
-- chart events (click, mouseover, etc)
-- chart selection
+<small>(a.k.a [attribute lists](https://doc.arcgis.com/en/arcgis-online/manage-data/define-attribute-lists-and-ranges.htm))</small>
 
 ---
 
@@ -360,8 +352,6 @@ Note:
 
 <a href="http://geohub.lacity.org/"><img src="img/la-geohub-vision-zero.png" class="transparent" width="800"></a>
 
-Recent [example built with cedar](http://nullvisjonen-vision-zero-1-testkommune.hub.arcgis.com/)
-
 ---
 
 ### Simplified chart building experience
@@ -373,11 +363,24 @@ Recent [example built with cedar](http://nullvisjonen-vision-zero-1-testkommune.
 
 ---
 
+### Cedar Charts in Hub Sites
+
+- Chart Builder: [John's Creek - City Finances](http://datahub.johnscreekga.gov/pages/finances)
+- Custom JSON: [City of Brampton - Globally Aware, Locally Active](http://geohub.brampton.ca/pages/globally-aware-locally-active-economy#five)
+
+---
+
+
 ### [ember-cli-cedar](https://github.com/Esri/ember-cli-cedar)
 
 <img src="img/tomster-sm.png" class="transparent">
 
 Can be used in _any_ [Ember](https://www.emberjs.com/) application
+
+Notes:
+- makes it easy to get cedar in Ember
+- helps you lazy-load amcharts
+- not
 
 ---
 
@@ -386,18 +389,15 @@ Can be used in _any_ [Ember](https://www.emberjs.com/) application
 ---
 
 ### <code style="color: gray">// TODO:</code>
-- docs!
-- shared ArcGIS chart spec
- - expand cedar API
- - `import()`
-- [finish v1](https://github.com/Esri/cedar/milestone/6)
-
----
-
-### Demo: `import()` ArcGIS Pro chart
+- AmCharts [v4](https://www.amcharts.com/javascript-charts/)
+- configuring tooltips
+- chart events (click, mouseover, etc)
+- chart selection
+- lazy-load charting library
+- support other charting libraries (engines)
 
 ---
 
 ### The End
 
-[@tomwayson/tomwayson/Charts-and-Custom-Visualizations-Beyond-the-Map](https://github.com/tomwayson/Charts-and-Custom-Visualizations-Beyond-the-Map)
+[@tomwayson/Charts-and-Custom-Visualizations-Beyond-the-Map](https://github.com/tomwayson/Charts-and-Custom-Visualizations-Beyond-the-Map)
