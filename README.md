@@ -2,8 +2,8 @@
 
 Slides and resources for the [2019 DevSummit](http://www.esri.com/events/devsummit) presentation: [Charts and Custom Visualizations Beyond the Map](https://devsummit2019.schedule.esri.com/schedule/2033153134).
 
-[Video](https://youtu.be/c_Snneph2UE)
-[Slides (second half, coverging Cedar)](https://tomwayson.github.io/Charts-and-Custom-Visualizations-Beyond-the-Map/)
+- [Video](https://youtu.be/c_Snneph2UE)
+- [Slides (second half, coverging Cedar)](https://tomwayson.github.io/Charts-and-Custom-Visualizations-Beyond-the-Map/)
 
 ## Schedule
 
